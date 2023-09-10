@@ -1,9 +1,8 @@
 #include <boost/asio/signal_set.hpp>
 
 #include <Network/Listener.hpp>
-#include <Network/SharedState.hpp>
 
-int main(int argc, char* argv[])
+int main()
 {
     std::string host{"127.0.0.1"};
     uint16_t port = 8080;

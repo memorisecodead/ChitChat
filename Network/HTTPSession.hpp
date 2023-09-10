@@ -1,7 +1,6 @@
 #pragma once 
 
 #include "BeastAttribute.hpp"
-#include "SharedState.hpp"
 #include "WebSocket.hpp"
 
 #include <iostream>

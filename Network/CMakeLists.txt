@@ -10,4 +10,3 @@ set(SOURCE_FILES
 add_library(${TARGET} STATIC ${SOURCE_FILES})
 
 target_link_libraries(${TARGET} PRIVATE ${EXTRA_LIBS} Boost::boost)
-
