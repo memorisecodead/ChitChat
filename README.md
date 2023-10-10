@@ -21,7 +21,7 @@ This is an open source, decentralized and multi-platform package manager for C/C
 
 Install Conan: 
 
- - Windows/Linux: ``` $ pip install conan==0.18.1```
+ - Windows/Linux: ``` $ pip install conan == 0.18.1```
 
 <font size="4">[CMake](https://cmake.org)<font size/>
 
