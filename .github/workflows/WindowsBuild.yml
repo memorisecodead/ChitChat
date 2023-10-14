@@ -33,7 +33,10 @@ jobs:
         path: 'C:\Users\runneradmin\.conan\*'
         key: ${{ runner.os }}${{matrix.BUILD_TYPE}}-conan
         restore-keys: ${{ runner.os }}${{matrix.BUILD_TYPE}}-conan
-      
+    
+    - name: Clear Conan cache
+      run: conan remove --all --force 
+
     - name: Configure CMake
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.BUILD_TYPE}}
 
@@ -42,5 +45,4 @@ jobs:
 
     - name: Test
       working-directory: ${{github.workspace}}/build
-
       run: ctest -C ${{matrix.BUILD_TYPE}} --output-on-failure
