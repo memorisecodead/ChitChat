@@ -2,9 +2,9 @@ name: Windows Build
 
 on:
   push:
-    branches: [ dev, master ]
+    branches: [ pat ]
   pull_request:
-    branches: [ dev, master ]
+    branches: [ pat ]
 
 jobs:
   build:
