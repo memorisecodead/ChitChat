@@ -1,4 +1,4 @@
-name: GCCLinuxBuild
+name: GCC Linux Build
 
 on:
   push:
