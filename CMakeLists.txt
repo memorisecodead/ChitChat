@@ -15,4 +15,4 @@ include(ConanModule)
 
 add_subdirectory(Network)
 add_subdirectory(Main)
-# add_subdirectory(Tests)
+add_subdirectory(Tests)
