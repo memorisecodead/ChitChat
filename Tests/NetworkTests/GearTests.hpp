@@ -2,19 +2,19 @@
 
 namespace GearTests
 {
-	netAsio::io_context testIO;
+	inline netAsio::io_context testIO;
 
 	namespace testproperties
 	{
-		std::string testHost{ "127.0.0.1" };
-		uint16_t testPort = 8080;
-		std::string testRoot{ "." };
+		const std::string testHost{ "127.0.0.1" };
+		const uint16_t testPort = 8080;
+		const std::string testRoot{ "." };
 	}
 
 	namespace badproperties
 	{
-		std::string badHost{ "0" };
-		uint16_t badPort = 66666;
-		std::string badRoot{ "666" };
+		const std::string badHost{ "0" };
+		const uint16_t badPort = 66666;
+		const std::string badRoot{ "666" };
 	}
 }
