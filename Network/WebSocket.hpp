@@ -13,6 +13,8 @@ class WebSocket;
 
 template<typename T> struct Type2Type { typedef T OriginalType; };
 
+/// for sonar view
+
 class Shared_state
 {
 	std::string _doc_root;

@@ -9,7 +9,7 @@
 
 class Shared_state;
 
-// sonar check
+/// sonar check
 
 class Listener : public std::enable_shared_from_this<Listener>
 {
