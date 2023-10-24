@@ -3,7 +3,7 @@
 #include <Network/Listener.hpp>
 #include <Tests/NetworkTests/GearTests.hpp>
 
-TEST_CASE("Listener Constuct ")
+TEST_CASE("Listener Constuct")
 {
 	using namespace GearTests;
 	using namespace GearTests::testproperties;
@@ -18,6 +18,11 @@ TEST_CASE("Listener Constuct ")
 			std::make_shared<Shared_state>(testRoot))
 			->run()
 		);
+
+		netAsio::io_context io;
+
+		CHECK_NOTHROW(std::make_shared<HTTPClient>(io)->run());
+		io.run();
 	}
 
 	SECTION("Constructor with bad parameters")
@@ -30,8 +35,4 @@ TEST_CASE("Listener Constuct ")
 			->run()
 		);
 	}
-
-
-
-
 }
