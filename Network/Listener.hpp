@@ -9,6 +9,8 @@
 
 class Shared_state;
 
+// sonar check
+
 class Listener : public std::enable_shared_from_this<Listener>
 {
 	tcp::acceptor _acceptor;
