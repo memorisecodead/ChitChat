@@ -1,6 +1,6 @@
 # ChitChat
 
-<font size="4">Test Simple Messager Implemented With boost::beast/boost::asio
+<font size="4">Simple Messager Implemented With **boost::beast/boost::asio**
 
 --- 
 
