@@ -3,36 +3,30 @@
 #include <Network/Listener.hpp>
 #include <Tests/NetworkTests/GearTests.hpp>
 
-TEST_CASE("Listener Constuct")
+TEST_CASE("WebSocket tests", "[WebSocket]")
 {
 	using namespace GearTests;
 	using namespace GearTests::testproperties;
 	using namespace GearTests::badproperties;
 
-	SECTION("Constuctor with parameters")
-	{
-		CHECK_NOTHROW
-		(
-			std::make_shared<Listener>
-			(testIO, tcp::endpoint{ netAsio::ip::make_address(testHost), testPort },
-			std::make_shared<Shared_state>(testRoot))
-			->run()
-		);
+	boost::asio::ip::tcp::socket testSocket(testIO);
 
-		netAsio::io_context io;
+	// Create a shared state
+	std::shared_ptr<Shared_state> sharedState = std::make_shared<Shared_state>("doc_root");
 
-		CHECK_NOTHROW(std::make_shared<HTTPClient>(io)->run());
-		io.run();
-	}
+	// Create a WebSocket instance
+	WebSocket webSocket(testSocket, sharedState);
 
-	SECTION("Constructor with bad parameters")
-	{
-		CHECK_NOTHROW
-		(
-			std::make_shared<Listener>
-			(testIO, tcp::endpoint{ netAsio::ip::make_address(badHost), badPort },
-			std::make_shared<Shared_state>(badRoot))
-			->run()
-		);
+	SECTION("Test WebSocket send") {
+		// Create a shared string
+		std::shared_ptr<const std::string> message = std::make_shared<const std::string>("Hello, WebSocket!");
+
+		// Call the send function
+		webSocket.send(message);
+
+		// Assert that the WebSocket's queue contains the sent message
+		REQUIRE(webSocket._queue.size() == 1);
+		REQUIRE(*(webSocket._queue[0]) == "Hello, WebSocket!");
+
 	}
 }

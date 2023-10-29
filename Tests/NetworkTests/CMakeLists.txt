@@ -1,7 +1,7 @@
 set(TARGET NetworkTests)
 set(OUTPUT_NAME NetworkTests)
 
-set(SOURCE_FILES NetworkTest.cpp GearTests.hpp)
+set(SOURCE_FILES NetworkTest.cpp)
 
 add_executable(${TARGET} ${SOURCE_FILES})
 
