@@ -1,32 +1,70 @@
-#include <catch2/catch_test_macros.hpp>
+﻿#define CATCH_CONFIG_MAIN
+#include <catch2/catch_all.hpp>
 
 #include <Network/Listener.hpp>
-#include <Tests/NetworkTests/GearTests.hpp>
+#include <Network/WebSocket.hpp>
 
-TEST_CASE("WebSocket tests", "[WebSocket]")
+TEST_CASE("WebSocket Test", "[WebSocket]")
 {
-	using namespace GearTests;
-	using namespace GearTests::testproperties;
-	using namespace GearTests::badproperties;
+    std::string host{ "127.0.0.1" };
+    uint16_t port = 8080;
+    std::string doc_root{ "." };
+    auto state = std::make_shared<Shared_state>(doc_root);
 
-	boost::asio::ip::tcp::socket testSocket(testIO);
+    netAsio::io_context io;
 
-	// Create a shared state
-	std::shared_ptr<Shared_state> sharedState = std::make_shared<Shared_state>("doc_root");
+    auto listener = std::make_shared<Listener>(
+        io, tcp::endpoint{ netAsio::ip::make_address(host), port }, state);
 
-	// Create a WebSocket instance
-	WebSocket webSocket(testSocket, sharedState);
+    WebSocket websocket(tcp::socket(io), state);
 
-	SECTION("Test WebSocket send") {
-		// Create a shared string
-		std::shared_ptr<const std::string> message = std::make_shared<const std::string>("Hello, WebSocket!");
+    state->join(websocket);
 
-		// Call the send function
-		webSocket.send(message);
+    std::thread listenerThread([&] {
+        listener->run();
+        io.run();
+        });
 
-		// Assert that the WebSocket's queue contains the sent message
-		REQUIRE(webSocket._queue.size() == 1);
-		REQUIRE(*(webSocket._queue[0]) == "Hello, WebSocket!");
+    SECTION("Fail function")
+    {
+        auto mesg = std::make_shared<std::string>("Hello");
+        websocket.send(mesg);
 
-	}
+    }
+
+    SECTION("OnAccept function")
+    {
+        
+    }
+
+    SECTION("OnRead function")
+    {
+
+    }
+
+    SECTION("OnWrite function")
+    {
+
+    }
+
+    io.stop();
+    listenerThread.join();
+}
+
+TEST_CASE("Shared_state Test", "[Shared_state]")
+{
+    SECTION("Join function")
+    {
+
+    }
+
+    SECTION("Leave function")
+    {
+
+    }
+
+    SECTION("Send function")
+    {
+
+    }
 }

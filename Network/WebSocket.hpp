@@ -53,7 +53,8 @@ public:
 	virtual ~WebSocket() { _state->leave(*this); }
 
 	template<typename Body, typename Allocator>
-	void run(boost::beast::http::request<Body, boost::beast::http::basic_fields<Allocator>> req);
+	void run(boost::beast::http::request<Body
+		, boost::beast::http::basic_fields<Allocator>> req);
 
 	void send(const std::shared_ptr<const std::string>& ss);
 };
