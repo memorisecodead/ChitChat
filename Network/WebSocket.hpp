@@ -57,6 +57,8 @@ public:
 		, boost::beast::http::basic_fields<Allocator>> req);
 
 	void send(const std::shared_ptr<const std::string>& ss);
+
+	std::vector<std::shared_ptr<const std::string>> queue() { return _queue; }
 };
 
 template<class Body, class Allocator>

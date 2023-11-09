@@ -4,7 +4,7 @@
 #include <Network/Listener.hpp>
 #include <Network/WebSocket.hpp>
 
-TEST_CASE("WebSocket Test", "[WebSocket]")
+TEST_CASE("Listener Test", "[Listener]")
 {
     std::string host{ "127.0.0.1" };
     uint16_t port = 8080;
@@ -16,41 +16,39 @@ TEST_CASE("WebSocket Test", "[WebSocket]")
     auto listener = std::make_shared<Listener>(
         io, tcp::endpoint{ netAsio::ip::make_address(host), port }, state);
 
-    WebSocket websocket(tcp::socket(io), state);
-
-    state->join(websocket);
-
-    std::thread listenerThread([&] {
-        listener->run();
-        io.run();
+    std::future<void> listenerResult = std::async(std::launch::async, [&]()
+        {
+            listener->run();
+            io.run();
         });
 
-    SECTION("Fail function")
+    boost::beast::websocket::stream<tcp::socket> ws(io);
+
+    tcp::resolver resolver(io);
+    auto const results = resolver.resolve(host, std::to_string(port));
+
+    netAsio::connect(ws.next_layer(), results.begin(), results.end());
+
+    SECTION("Listner run behavior")
     {
-        auto mesg = std::make_shared<std::string>("Hello");
-        websocket.send(mesg);
+        std::string message{ "Hello, WebSocket!" };
 
-    }
+        ws.handshake(host, state.get()->doc_root());
+        ws.write(netAsio::buffer(message));
 
-    SECTION("OnAccept function")
-    {
-        
-    }
+        boost::beast::flat_buffer buffer;
+        ws.read(buffer);
 
-    SECTION("OnRead function")
-    {
+        REQUIRE(boost::beast::buffers_to_string(buffer.data()).c_str() == message);
 
-    }
-
-    SECTION("OnWrite function")
-    {
-
+        ws.close(boost::beast::websocket::close_code::normal);
     }
 
     io.stop();
-    listenerThread.join();
+    listenerResult.get();
 }
 
+#if 0
 TEST_CASE("Shared_state Test", "[Shared_state]")
 {
     SECTION("Join function")
@@ -68,3 +66,28 @@ TEST_CASE("Shared_state Test", "[Shared_state]")
 
     }
 }
+#endif
+
+#if 0
+TEST_CASE("WebSocket Test", "[WebSocket]")
+{
+    SECTION("Send Message")
+    {
+        //const std::shared_ptr<const std::string> message = 
+//    std::make_shared<const std::string>("Hello, WebSocket!");
+
+                //REQUIRE(websocket.queue().size() == 1);
+        //REQUIRE(*(websocket.queue()[0]) == "Hello, WebSocket!");
+    }
+
+    SECTION("Send Fail Message")
+    {
+
+    }
+
+    SECTION("Check queue size")
+    {
+
+    }
+}
+#endif 
