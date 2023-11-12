@@ -1,3 +1,6 @@
+list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/Conan)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
+
 if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
   message(STATUS "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
   file(DOWNLOAD "https://raw.githubusercontent.com/conan-io/cmake-conan/0.18.0/conan.cmake"
@@ -9,9 +12,10 @@ include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 conan_cmake_configure(REQUIRES boost/1.81.0
 							   catch2/3.4.0
-                    GENERATORS cmake_find_package_multi)
+                    GENERATORS cmake_find_package)
 
 conan_cmake_autodetect(settings)
+
 conan_cmake_install(PATH_OR_REFERENCE .
                     REMOTE conancenter
                     BUILD missing
@@ -19,9 +23,6 @@ conan_cmake_install(PATH_OR_REFERENCE .
                     SETTINGS ${settings}
                     ENV "F77=no"
                     ENV "FCs=no")
-
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/Conan)
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 
 find_package(Boost REQUIRED)
 find_package(Catch2 REQUIRED)
