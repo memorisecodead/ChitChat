@@ -10,8 +10,7 @@ include(${CMAKE_BINARY_DIR}/conan.cmake)
 conan_cmake_configure(REQUIRES boost/1.81.0
 							   catch2/3.4.0
                     GENERATORS cmake_find_package_multi)
-
-conan_cmake_autodetect(settings)
+					
 conan_cmake_install(PATH_OR_REFERENCE .
                     REMOTE conancenter
                     BUILD missing
