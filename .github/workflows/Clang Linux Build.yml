@@ -23,11 +23,11 @@ jobs:
     - name: Python setup
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: '3.12.0'
         architecture: 'x64'
         
     - name: Get prerequisites
-      run: python -m pip install conan==1.60.0 cmake 
+      run: python -m pip install conan==1.61.0 cmake 
 
     - name: Cache Conan packages
       id: conan-cache
