@@ -17,12 +17,9 @@ conan_cmake_configure(REQUIRES boost/1.81.0
 conan_cmake_autodetect(settings)
 
 conan_cmake_install(PATH_OR_REFERENCE .
-                    REMOTE conancenter
                     BUILD missing
-                    INSTALL_FOLDER ${CMAKE_BINARY_DIR}/Conan
-                    SETTINGS ${settings}
-                    ENV "F77=no"
-                    ENV "FCs=no")
+                    REMOTE conancenter
+                    SETTINGS ${settings})
 
 find_package(Boost REQUIRED)
 find_package(Catch2 REQUIRED)
