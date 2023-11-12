@@ -15,7 +15,7 @@ jobs:
       BUILD_WRAPPER_OUT_DIR: /home/runner/.build_wrapper_out/
     strategy:
       matrix:
-        BUILD_TYPE: [Debug, Release]
+        BUILD_TYPE: [Debug]
 
     steps:
     - name: Checkout
