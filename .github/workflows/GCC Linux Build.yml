@@ -72,9 +72,6 @@ jobs:
     - name: Build using build-wrapper 
       run: |
         build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build ${{github.workspace}}/build --config ${{matrix.BUILD_TYPE}}
-
-    - name: Build
-      run: cmake --build ${{github.workspace}}/build --config ${{matrix.BUILD_TYPE}}
     
     - name: Install
       run: cmake --install /home/runner/work/ChitChat/ChitChat/build
