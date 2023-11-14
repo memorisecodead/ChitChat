@@ -7,7 +7,6 @@
 #include <cstdlib>
 #include <memory>
 
-
 boost::beast::string_view mime_type(boost::beast::string_view path)
 {
     using boost::beast::iequals;
@@ -156,7 +155,6 @@ void handle_request(
     res.keep_alive(req.keep_alive());
     return send(std::move(res));
 }
-
 
 class HTTPSession : public std::enable_shared_from_this<HTTPSession>
 {
