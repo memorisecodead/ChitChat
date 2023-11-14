@@ -1,17 +1,15 @@
 set(TARGET Network)
 set(OUTPUT_NAME Network)
 
-set(SOURCE_FILES
+set(HEADER_FILES
 	BeastAttribute.hpp
 	WebSocket.hpp
-	WebSocket.cpp
-	HTTPSession.hpp
-	HTTPSession.cpp
-	SharedState.hpp
-	SharedState.cpp
+	HTTPSession.hpp	
 	Listener.hpp
-	Listener.cpp)
-	
-add_library(${TARGET} STATIC ${SOURCE_FILES})
+	)
 
-target_link_libraries(${TARGET} PRIVATE ${EXTRA_LIBS} Boost::boost)
+add_library(${TARGET} INTERFACE)
+
+target_link_libraries(${TARGET} INTERFACE  ${Boost_INCLUDE_DIRS})
+
+target_include_directories(${TARGET} INTERFACE  ${Boost_INCLUDE_DIRS})
