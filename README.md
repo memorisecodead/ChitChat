@@ -1,6 +1,6 @@
-#ChitChat
+# ChitChat
 
-<font size="4">Test Simple Messager Implemented With boost::beast/boost::asio
+<font size="4">Simple Messager Implemented With **boost::beast/boost::asio**
 
 --- 
 
@@ -21,7 +21,8 @@ This is an open source, decentralized and multi-platform package manager for C/C
 
 Install Conan: 
 
- - Windows/Linux: ``` $ pip install conan```
+ - Windows/Linux: ``` $ pip install conan==1.61.0```
+ - Windows/Linux: [conan-source-execution files](https://github.com/conan-io/conan/releases/tag/1.61.0)
 
 <font size="4">[CMake](https://cmake.org)<font size/>
 
