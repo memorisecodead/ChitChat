@@ -12,7 +12,5 @@ conan_cmake_run(REQUIRES boost/1.81.0
                 BASIC_SETUP CMAKE_TARGETS
                 BUILD missing)
 
-list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/Conan)
-
 find_package(Boost REQUIRED)
 find_package(Catch2 REQUIRED)
