@@ -9,6 +9,7 @@ set (CXX_EXTENSIONS off)
 set (CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 
 include(CMakeConfig)
 include(ConanModule)
