@@ -7,10 +7,15 @@ endif()
 
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
+conan_check(VERSION 1.61.0 REQUIRED)
+
 conan_cmake_run(REQUIRES boost/1.81.0
 						 catch2/3.4.0
                 BASIC_SETUP CMAKE_TARGETS
                 BUILD missing)
+				
+list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/Conan)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 
 find_package(Boost REQUIRED)
 find_package(Catch2 REQUIRED)
