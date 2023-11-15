@@ -8,17 +8,13 @@ endif()
 include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 conan_cmake_configure(REQUIRES boost/1.81.0
-							   catch2/3.4.0
+							   
                     GENERATORS cmake_find_package)
 
-conan_cmake_autodetect(settings BUILD_TYPE ${TYPE})
-conan_cmake_install(PATH_OR_REFERENCE .
-                    REMOTE conancenter
-                    BUILD missing
-                    INSTALL_FOLDER ${CMAKE_BINARY_DIR}/Conan
-                    SETTINGS ${settings}
-                    ENV "F77=no"
-                    ENV "FCs=no")
+conan_cmake_run(REQUIRES boost/1.81.0
+						 catch2/3.4.0
+                BASIC_SETUP CMAKE_TARGETS
+                BUILD missing)
 
 list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/Conan)
 
