@@ -4,6 +4,8 @@
 #include <Network/Listener.hpp>
 #include <Network/WebSocket.hpp>
 
+#include <future>
+
 TEST_CASE("Listener Test", "[Listener]")
 {
     std::string host{ "127.0.0.1" };
