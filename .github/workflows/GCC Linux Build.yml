@@ -52,14 +52,14 @@ jobs:
         python-version: '3.12.0'
         architecture: 'x64'
 
-   - name: Install Conan
-     run: pip install "conan<2.0" pytest && conan --version
+    - name: Install Conan
+      run: pip install "conan<2.0" pytest && conan --version
 
-   - name: Setup cmake
-     uses: jwlawson/actions-setup-cmake@v1.13
-     with:
-      cmake-version: '3.27.x'
-
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.13
+      with:
+       cmake-version: '3.27.x'
+ 
     - name: Cache Conan packages
       id: conan-cache
       uses: actions/cache@v2
