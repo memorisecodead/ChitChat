@@ -9,7 +9,7 @@ include(${CMAKE_BINARY_DIR}/conan.cmake)
 
 conan_cmake_configure(REQUIRES boost/1.81.0
 							   catch2/3.4.0 
-                      GENERATORS cmake_find_package) 
+                      GENERATORS cmake_find_package boost-build) 
  
 conan_cmake_autodetect(settings) 
  
