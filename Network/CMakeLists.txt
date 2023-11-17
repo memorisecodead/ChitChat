@@ -8,8 +8,8 @@ set(HEADER_FILES
 	Listener.hpp
 	)
 
-add_library(${TARGET} INTERFACE)
+add_library(${TARGET} PUBLIC )
 
-target_link_libraries(${TARGET} INTERFACE  ${Boost_INCLUDE_DIRS})
+target_link_libraries(${TARGET} PUBLIC Boost::boost)
 
-target_include_directories(${TARGET} INTERFACE  ${Boost_INCLUDE_DIRS})
+target_include_directories(${TARGET} PUBLIC Boost::boost)
