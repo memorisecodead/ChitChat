@@ -55,6 +55,9 @@ jobs:
     - name: Install Conan
       run: pip install "conan<2.0" pytest && conan --version
 
+    - name: Install gcovr
+      run: pip install gcovr==5.0
+
     - name: Setup cmake
       uses: jwlawson/actions-setup-cmake@v1.13
       with:
