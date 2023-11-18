@@ -26,7 +26,7 @@ jobs:
         python-version: '3.12.0'
         architecture: 'x64'
         
-     - name: Install Conan
+    - name: Install Conan
       run: pip install "conan<2.0" pytest && conan --version
 
     - name: Setup cmake
