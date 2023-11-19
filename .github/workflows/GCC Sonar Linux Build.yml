@@ -1,4 +1,4 @@
-name: GCC Linux Build
+name: GCC Sonar Linux Build
 on:
   push:
     branches: [ main ]
