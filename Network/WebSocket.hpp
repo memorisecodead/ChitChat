@@ -9,6 +9,8 @@
 
 #include "BeastAttribute.hpp"
 
+/// for sonar view
+
 class WebSocket;
 
 template<typename T> struct Type2Type { typedef T OriginalType; };
