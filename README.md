@@ -12,12 +12,12 @@ This is an open source, decentralized and multi-platform package manager for C/C
 
  Install Python: 
 
- - Windows: [Python 3.11.4.exe](https://www.python.org/downloads/release/python-3114/)
+ - Windows: [Python 3.12.0.exe](https://www.python.org/ftp/python/3.12.0/)
 
  - Linux: 
 ```$ sudo apt-get update ```
 
-```$ sudo apt-get install python3.11.4```
+```$ sudo apt-get install python3.12```
 
 Install Conan: 
 
