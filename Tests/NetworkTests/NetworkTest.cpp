@@ -33,7 +33,7 @@ TEST_CASE("Listener Test", "[Listener]")
 
     SECTION("Listener configure")
     {
-        CHECK_NOTHROW(listener);
+        CHECK_NOTHROW(listener->run());
     }
 
     SECTION("Listener run behavior")
@@ -52,7 +52,7 @@ TEST_CASE("Listener Test", "[Listener]")
     }
 
     io.stop();
-    CHECK_NOTHROW(listenerResult.get());
+    listenerResult.get();
 }
 
 #if 0
