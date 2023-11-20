@@ -19,3 +19,4 @@ target_include_directories(${TARGET}
 add_test(NAME ${OUTPUT_NAME} COMMAND ${TARGET})
 
 install(TARGETS ${TARGET} RUNTIME DESTINATION ${TEST_INSTALL_DIR})
+

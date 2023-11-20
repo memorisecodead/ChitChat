@@ -1,5 +1,5 @@
 #define CATCH_CONFIG_MAIN
-#include <catch2/catch_all.hpp>
+#include <catch2/catch_all.hpp> 
 
 #include <Network/Listener.hpp>
 #include <Network/WebSocket.hpp>
@@ -31,7 +31,12 @@ TEST_CASE("Listener Test", "[Listener]")
 
     netAsio::connect(ws.next_layer(), results.begin(), results.end());
 
-    SECTION("Listner run behavior")
+    SECTION("Listener configure")
+    {
+        CHECK_NOTHROW(listener);
+    }
+
+    SECTION("Listener run behavior")
     {
         std::string message{ "Hello, WebSocket!" };
 
@@ -47,7 +52,7 @@ TEST_CASE("Listener Test", "[Listener]")
     }
 
     io.stop();
-    listenerResult.get();
+    CHECK_NOTHROW(listenerResult.get());
 }
 
 #if 0
