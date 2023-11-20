@@ -15,6 +15,12 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 include(CMakeConfig)	
 include(ConanModule)
 
+if (COVERAGE_MODE)
+    include(Coverage)
+endif()
+
+enable_testing()
+
 add_subdirectory(Network)
 add_subdirectory(Main)
 add_subdirectory(Tests)
