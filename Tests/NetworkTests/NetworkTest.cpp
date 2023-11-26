@@ -20,7 +20,7 @@ TEST_CASE("Listener Test", "[Listener]")
 
     std::future<void> listenerResult = std::async(std::launch::async, [&]()
         {
-            listener->run();
+            CHECK_NOTHROW(listener->run());
             io.run();
         });
 
@@ -29,7 +29,7 @@ TEST_CASE("Listener Test", "[Listener]")
     tcp::resolver resolver(io);
     auto const results = resolver.resolve(host, std::to_string(port));
 
-    netAsio::connect(ws.next_layer(), results.begin(), results.end());
+    CHECK_NOTHROW(netAsio::connect(ws.next_layer(), results.begin(), results.end()));
 
     SECTION("Listener configure")
     {
