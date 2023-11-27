@@ -58,7 +58,7 @@ public:
 
 	void send(const std::shared_ptr<const std::string>& ss);
 
-	std::vector<std::shared_ptr<const std::string>> queue() { return _queue; }
+	std::vector<std::shared_ptr<const std::string>> queue() const { return _queue; }
 };
 
 template<class Body, class Allocator>
