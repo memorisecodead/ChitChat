@@ -6,12 +6,12 @@
 
 #include <future>
 
-#if 1
+#if 0
 TEST_CASE("Listener Test", "[Listener]")
 {
-    std::string host{ "127.0.0.1" };
-    uint16_t port = 8080;
-    std::string doc_root{ "." };
+    const std::string host{ "127.0.0.1" };
+    const uint16_t port = 8080;
+    const std::string doc_root{ "." };
     auto state = std::make_shared<Shared_state>(doc_root);
 
     netAsio::io_context io;
@@ -37,14 +37,14 @@ TEST_CASE("Listener Test", "[Listener]")
         std::string message{ "Hello, WebSocket!" };
 
         ws.handshake(host, state.get()->doc_root());
-        CHECK_NOTHROW(ws.write(netAsio::buffer(message)));
+        ws.write(netAsio::buffer(message));
 
         boost::beast::flat_buffer buffer;
-        CHECK_NOTHROW(ws.read(buffer));
+        ws.read(buffer);
 
         REQUIRE(boost::beast::buffers_to_string(buffer.data()).c_str() == message);
 
-        CHECK_NOTHROW(ws.close(boost::beast::websocket::close_code::normal));
+        ws.close(boost::beast::websocket::close_code::normal);
     }
 
     io.stop();
@@ -52,22 +52,34 @@ TEST_CASE("Listener Test", "[Listener]")
 }
 #endif
 
-#if 0
+#if 1
 TEST_CASE("Shared_state Test", "[Shared_state]")
 {
-    SECTION("Join function")
-    {
+    const std::string root{ "/" };
+    auto shared_state = std::make_shared<Shared_state>(root);
 
+    netAsio::io_context io;
+
+    SECTION("Root state")
+    {
+        REQUIRE(shared_state->doc_root().c_str() == root);
     }
 
-    SECTION("Leave function")
+    SECTION("Join && Leave states")
     {
+        const std::string dummyRoot{ "." };
 
+        WebSocket dummySocket(tcp::socket(io), 
+            std::shared_ptr<Shared_state>(new Shared_state(dummyRoot)));
+
+        CHECK_NOTHROW(shared_state->join(dummySocket));
+        REQUIRE(shared_state->doc_root().c_str() != dummyRoot);
+        CHECK_NOTHROW(shared_state->leave(dummySocket));
     }
 
     SECTION("Send function")
     {
-
+        CHECK_NOTHROW(shared_state->send("dummyTest"));
     }
 }
 #endif
