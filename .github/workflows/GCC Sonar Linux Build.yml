@@ -79,12 +79,9 @@ jobs:
       working-directory: ${{github.workspace}}/build  
       run: ctest -C ${{matrix.BUILD_TYPE}} --output-on-failure
 
-    - name: Run tests with coverage
-      run: >
-          vstest.console.exe test1\*\test1.dll test2\*\test2.dll 
-          /EnableCodeCoverage 
-          /Collect:"Code Coverage;Format=Xml" 
-          /ResultsDirectory:"${{ env.COVERAGE_RESULTS }}"
+    - name: Compute Code Coverage
+      working-directory: ${{github.workspace}}/build
+      run: gcovr -r ../ --sonarqube ${{github.workspace}}/build/coverage.xml --exclude-unreachable-branches --exclude-throw-branches
 
     - name: Run sonar-scanner
       env:
