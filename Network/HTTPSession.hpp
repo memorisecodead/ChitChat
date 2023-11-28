@@ -7,8 +7,6 @@
 #include <cstdlib>
 #include <memory>
 
-/// for sonar view
-
 boost::beast::string_view mime_type(boost::beast::string_view path)
 {
     using boost::beast::iequals;

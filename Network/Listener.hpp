@@ -7,8 +7,6 @@
 #include"BeastAttribute.hpp"
 #include "HTTPSession.hpp"
 
-/// for sonar view
-
 class Shared_state;
 
 class Listener : public std::enable_shared_from_this<Listener>
