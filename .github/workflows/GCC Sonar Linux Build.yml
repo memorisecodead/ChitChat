@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
 
     - name: Install sonar-scanner and build-wrapper
-      uses: sonarsource/sonarcloud-scanner:2.0.0
+      uses: sonarsource/sonarcloud-github-c-cpp@v1
           
     - name: Install dependencies
       run: sudo apt-get install libgl-dev 
