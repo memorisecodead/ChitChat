@@ -68,7 +68,7 @@ TEST_CASE("Shared_state Test", "[Shared_state]")
     SECTION("Join && Leave states")
     {
         const std::string dummyRoot{ "." };
-        std::shared_ptr<Shared_state> dummyState = 
+        auto dummyState = 
             std::make_shared<Shared_state>(dummyRoot);
 
         WebSocket dummySocket(tcp::socket(io), dummyState);
