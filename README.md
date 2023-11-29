@@ -1,4 +1,8 @@
-# ChitChat
+[![Clang Linux Build](https://github.com/memorisecodead/ChitChat/actions/workflows/Clang%20Linux%20Build.yml/badge.svg)](https://github.com/memorisecodead/ChitChat/actions/workflows/Clang%20Linux%20Build.yml)
+[![Windows Build](https://github.com/memorisecodead/ChitChat/actions/workflows/Windows%20Build.yml/badge.svg)](https://github.com/memorisecodead/ChitChat/actions/workflows/Windows%20Build.yml)
+[![GCC Linux Build](https://github.com/memorisecodead/ChitChat/actions/workflows/GCC%20Linux%20Build.yml/badge.svg)](https://github.com/memorisecodead/ChitChat/actions/workflows/GCC%20Linux%20Build.yml)
+
+![](./ChitChat_logo.png)
 
 <font size="4">Simple Messager Implemented With **boost::beast/boost::asio**
 
