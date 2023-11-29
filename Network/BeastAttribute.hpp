@@ -2,6 +2,6 @@
 
 #include <boost/beast.hpp>
 
-namespace netAsio = boost::asio;
-using tcp = netAsio::ip::tcp;
+namespace asio = boost::asio;
+using tcp = asio::ip::tcp;
 using error_code = boost::system::error_code;
