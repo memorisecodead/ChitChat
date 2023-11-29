@@ -6,6 +6,7 @@ set(HEADER_FILES
 	WebSocket.hpp
 	HTTPSession.hpp	
 	Listener.hpp
+	ListenerConfig.hpp
 	)
 
 add_library(${TARGET} INTERFACE)

@@ -14,10 +14,10 @@ TEST_CASE("Listener Test", "[Listener]")
     const std::string localroot{ "." };
     auto state = std::make_shared<Shared_state>(localroot);
 
-    netAsio::io_context io;
+    asio::io_context io;
 
     auto listener = std::make_shared<Listener>(
-        io, tcp::endpoint{ netAsio::ip::make_address(localhost), port }, state);
+        io, tcp::endpoint{ asio::ip::make_address(localhost), port }, state);
 
     std::future<void> listenerResult = std::async(std::launch::async, [&listener, &io]()
         {
@@ -30,14 +30,14 @@ TEST_CASE("Listener Test", "[Listener]")
     tcp::resolver resolver(io);
     auto const results = resolver.resolve(localhost, std::to_string(port));
 
-    netAsio::connect(ws.next_layer(), results.begin(), results.end());
+    asio::connect(ws.next_layer(), results.begin(), results.end());
 
     SECTION("Listener run behavior")
     {
         std::string message{ "Hello, WebSocket!" };
 
         ws.handshake(localhost, state.get()->doc_root());
-        ws.write(netAsio::buffer(message));
+        ws.write(asio::buffer(message));
 
         boost::beast::flat_buffer buffer;
         ws.read(buffer);
@@ -58,7 +58,7 @@ TEST_CASE("Shared_state Test", "[Shared_state]")
     const std::string root{ "/" };
     auto shared_state = std::make_shared<Shared_state>(root);
 
-    netAsio::io_context io;
+    asio::io_context io;
 
     SECTION("Root state")
     {

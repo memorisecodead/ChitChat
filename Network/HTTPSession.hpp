@@ -7,6 +7,11 @@
 #include <cstdlib>
 #include <memory>
 
+/**
+* @brief method for simple mapping of file extensions to corresponding MIME types
+* @details It can be used to determine the MIME type of a file based on its extension, 
+*          which is useful in web development and other contexts where MIME types are required.
+*/
 boost::beast::string_view mime_type(boost::beast::string_view path)
 {
     using boost::beast::iequals;
@@ -41,6 +46,10 @@ boost::beast::string_view mime_type(boost::beast::string_view path)
     return "application/text";
 }
 
+/**
+* @brief method for concatenates two paths,
+*        taking into account the platform-specific path separators ('\\' or '/').
+*/
 std::string path_cat(boost::beast::string_view base, boost::beast::string_view path)
 {
     if (base.empty())
@@ -63,6 +72,11 @@ std::string path_cat(boost::beast::string_view base, boost::beast::string_view p
     return result;
 }
 
+/**
+* @brief method for handles an HTTP request by validating the request, 
+*        opening the requested file, and generating an appropriate response 
+*        based on the request and file availability.
+*/
 template<class Body, class Allocator, class Send>
 void handle_request(
     boost::beast::string_view doc_root,
@@ -156,6 +170,13 @@ void handle_request(
     return send(std::move(res));
 }
 
+/**
+* @class HTTPSession
+* @brief This class this class serves as a bridge to the Internet client
+* @details HTTPSession is directly the root of the back-end. The main tasks are 
+*          establish connection with WebSocket for correct data exchange between clients; 
+*          Reading, sending packets of information.
+*/
 class HTTPSession : public std::enable_shared_from_this<HTTPSession>
 {
 	tcp::socket _socket;
@@ -163,21 +184,46 @@ class HTTPSession : public std::enable_shared_from_this<HTTPSession>
 	std::shared_ptr<Shared_state> _state;
 	boost::beast::http::request<boost::beast::http::string_body> _req;
 
-	void fail(error_code ec, const char* what);
+    /**
+    * @brief method called in case of an error 
+    *        and passing the error code and error description.
+    */
+    void fail(error_code ec, const char* what);
+    
+    /**
+    * @brief method to communicate with WebSocket
+    * @details Checks the connection to the socket and establishes 
+    *          a connection to the link channel if the socket is ready for use.
+    */
 	void onRead(error_code ec, std::size_t);
-	void onWrite(error_code ec, std::size_t, bool close);
+	
+    /**
+    * @brief method to handle the write operation for an HTTP session
+    * @details checking for errors, performing necessary actions based on the close parameter, 
+    *          and initiating an asynchronous read operation: The async_read function takes a lambda
+    *          function as a callback, capturing self as a shared pointer to this. Inside the lambda, it calls the 
+    *          onRead member function of self with the received error code (ec) and the number of bytes received (bytes).
+    */
+    void onWrite(error_code ec, std::size_t, bool close);
 
 public:
+    /**
+    * @brief definition of constructor
+    */
 	HTTPSession(tcp::socket socket, const std::shared_ptr<Shared_state>& state)
 		: _socket(std::move(socket)), 
 		  _state(state) {}
 
+    /**
+    * @brief method to start the processing of an HTTP session 
+    *        by initiating an asynchronous read operation
+    */
 	void run();
 };
 
 void HTTPSession::fail(error_code ec, const char* what)
 {
-    if (ec == netAsio::error::operation_aborted)
+    if (ec == asio::error::operation_aborted)
         return;
     std::cerr << what << ": " << "\n";
 }
