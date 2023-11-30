@@ -36,6 +36,4 @@ Install CMake:
 
  - Windows: [cmake-3.27.0-win64-x64.msi](https://github.com/Kitware/CMake/releases/download/v3.27.0-rc1/cmake-3.27.0-rc1-windows-x86_64.msi)
 
-
  - Linux: [cmake-3.27.0-Linux-x86_64.sh](https://github.com/Kitware/CMake/releases/download/v3.27.0-rc1/cmake-3.27.0-rc1-linux-x86_64.sh)
-
