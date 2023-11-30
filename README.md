@@ -4,13 +4,13 @@
 
 ![](./ChitChat_logo.png)
 
-<font size="4">Simple Messager Implemented With **boost::beast/boost::asio**
+A simple and efficient C++ implementation of a messenger using the popular boost::beast and boost::asio libraries for networking.
 
 --- 
 
 ## Getting started
 
-<font size="4">[Conan](https://conan.io/index.html)<font size/>
+[Conan](https://conan.io/index.html)
 
 This is an open source, decentralized and multi-platform package manager for C/C++.
 
@@ -28,7 +28,7 @@ Install Conan:
  - Windows/Linux: ``` $ pip install conan==1.61.0```
  - Windows/Linux: [conan-source-execution files](https://github.com/conan-io/conan/releases/tag/1.61.0)
 
-<font size="4">[CMake](https://cmake.org)<font size/>
+[CMake](https://cmake.org)
 
 CMake is a cross-platform, open-source build system generator. 
 
@@ -41,4 +41,4 @@ Install CMake:
 
 ## Build
 
-```cmake .. -DCMAKE_BUILD_TYPE=Debug```
+```cmake .. -DCMAKE_BUILD_TYPE=[BUILD_TYPE]```
