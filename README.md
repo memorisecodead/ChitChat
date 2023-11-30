@@ -39,6 +39,3 @@ Install CMake:
 
  - Linux: [cmake-3.27.0-Linux-x86_64.sh](https://github.com/Kitware/CMake/releases/download/v3.27.0-rc1/cmake-3.27.0-rc1-linux-x86_64.sh)
 
-## Build
-
-```cmake .. -DCMAKE_BUILD_TYPE=[BUILD_TYPE]```
