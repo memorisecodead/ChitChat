@@ -1,12 +1,16 @@
-# ChitChat
+[![Clang Linux Build](https://github.com/memorisecodead/ChitChat/actions/workflows/Clang%20Linux%20Build.yml/badge.svg)](https://github.com/memorisecodead/ChitChat/actions/workflows/Clang%20Linux%20Build.yml)
+[![Windows Build](https://github.com/memorisecodead/ChitChat/actions/workflows/Windows%20Build.yml/badge.svg)](https://github.com/memorisecodead/ChitChat/actions/workflows/Windows%20Build.yml)
+[![GCC Linux Build](https://github.com/memorisecodead/ChitChat/actions/workflows/GCC%20Linux%20Build.yml/badge.svg)](https://github.com/memorisecodead/ChitChat/actions/workflows/GCC%20Linux%20Build.yml)
 
-<font size="4">Simple Messager Implemented With **boost::beast/boost::asio**
+![](./ChitChat_logo.png)
+
+A simple and efficient C++ implementation of a messenger using the popular boost::beast and boost::asio libraries for networking.
 
 --- 
 
 ## Getting started
 
-<font size="4">[Conan](https://conan.io/index.html)<font size/>
+[Conan](https://conan.io/index.html)
 
 This is an open source, decentralized and multi-platform package manager for C/C++.
 
@@ -24,7 +28,7 @@ Install Conan:
  - Windows/Linux: ``` $ pip install conan==1.61.0```
  - Windows/Linux: [conan-source-execution files](https://github.com/conan-io/conan/releases/tag/1.61.0)
 
-<font size="4">[CMake](https://cmake.org)<font size/>
+[CMake](https://cmake.org)
 
 CMake is a cross-platform, open-source build system generator. 
 
@@ -32,9 +36,4 @@ Install CMake:
 
  - Windows: [cmake-3.27.0-win64-x64.msi](https://github.com/Kitware/CMake/releases/download/v3.27.0-rc1/cmake-3.27.0-rc1-windows-x86_64.msi)
 
-
  - Linux: [cmake-3.27.0-Linux-x86_64.sh](https://github.com/Kitware/CMake/releases/download/v3.27.0-rc1/cmake-3.27.0-rc1-linux-x86_64.sh)
-
-## Build
-
-```cmake .. -DCMAKE_BUILD_TYPE=Debug```

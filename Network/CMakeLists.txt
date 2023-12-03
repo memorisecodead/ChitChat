@@ -6,10 +6,11 @@ set(HEADER_FILES
 	WebSocket.hpp
 	HTTPSession.hpp	
 	Listener.hpp
+	ListenerConfig.hpp
 	)
 
 add_library(${TARGET} INTERFACE)
 
-target_link_libraries(${TARGET} INTERFACE  ${Boost_INCLUDE_DIRS})
+target_link_libraries(${TARGET} INTERFACE Boost::boost)
 
-target_include_directories(${TARGET} INTERFACE  ${Boost_INCLUDE_DIRS})
+target_include_directories(${TARGET} INTERFACE Boost::boost)

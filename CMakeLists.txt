@@ -9,9 +9,17 @@ set (CXX_EXTENSIONS off)
 set (CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake/")
+list(APPEND CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR}/Conan)
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR})
 
-include(CMakeConfig)
+include(CMakeConfig)	
 include(ConanModule)
+
+if (COVERAGE_MODE)
+    include(Coverage)
+endif()
+
+enable_testing()
 
 add_subdirectory(Network)
 add_subdirectory(Main)

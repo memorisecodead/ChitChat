@@ -1,0 +1,77 @@
+name: GCC Sonar Linux Build
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env: 
+      SONAR_SCANNER_VERSION: 5.0.1.3006
+      SONAR_SERVER_URL: "https://sonarcloud.io"
+      BUILD_WRAPPER_OUT_DIR: build_wrapper_output_directory 
+    strategy:
+      matrix:
+        BUILD_TYPE: [Debug]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+          fetch-depth: 0
+
+    - name: Install sonar-scanner and build-wrapper
+      uses: sonarsource/sonarcloud-github-c-cpp@v1
+          
+    - name: Install dependencies
+      run: sudo apt-get install libgl-dev 
+
+    - name: Python setup
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12.0'
+        architecture: 'x64'
+
+    - name: Install Conan
+      run: pip install "conan<2.0" pytest && conan --version
+
+    - name: Install gcovr
+      run: pip install gcovr==5.0
+
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.13
+      with:
+       cmake-version: '3.27.x'
+ 
+    - name: Cache Conan packages
+      id: conan-cache
+      uses: actions/cache@v2
+      with:
+        path: '/home/runner/.conan/*'
+        key: ${{ runner.os }}${{matrix.BUILD_TYPE}}-conan
+        restore-keys: ${{ runner.os }}${{matrix.BUILD_TYPE}}-conan
+    
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.BUILD_TYPE}} -DCOVERAGE_MODE:BOOL=True
+
+    - name: Run build-wrapper
+      run: |
+        build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }}  cmake --build ${{github.workspace}}/build --config ${{matrix.BUILD_TYPE}}
+
+    - name: Install
+      run: cmake --install /home/runner/work/ChitChat/ChitChat/build
+
+    - name: Test
+      working-directory: ${{github.workspace}}/build  
+      run: ctest -C ${{matrix.BUILD_TYPE}} --output-on-failure
+
+    - name: Compute Code Coverage
+      working-directory: ${{github.workspace}}/build
+      run: gcovr -r ../ --sonarqube ${{github.workspace}}/build/coverage.xml --exclude-unreachable-branches --exclude-throw-branches
+
+    - name: Run sonar-scanner
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+          sonar-scanner --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"
